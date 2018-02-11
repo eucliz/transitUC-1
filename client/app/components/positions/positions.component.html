@@ -1,0 +1,22 @@
+
+    <div class="tab-content" id="nav-tabContent">
+        <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+            <ng-container>
+                
+                <agm-marker *ngFor="let position of positions; let i = index;"
+                 [latitude]="position.latitude"
+                 [longitude]="position.longitude"
+                 [label]="(i+1).toString()">
+                    <agm-info-window>
+                        <strong>{{position.data_read_utc_time | date:'short'}}</strong>
+                    </agm-info-window>
+                </agm-marker>
+
+                <agm-polyline *ngIf="positions?.length > 1">
+                   <agm-polyline-point *ngFor="let position of positions; let i = index;" [latitude]="position.latitude" [longitude]="position.longitude">
+                   </agm-polyline-point>
+               </agm-polyline>
+
+            </ng-container>
+        </agm-map>
+    </div>

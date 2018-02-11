@@ -15,6 +15,16 @@ router.get('/positions', function(req, res, next){
     });
 });
 
+// GET all Devices
+router.get('/devices', function(req, res, next){
+    db.positions.distinct('imei', {}, function(err, devices){
+        if(err){
+            res.send(err);
+        }
+        res.json(devices);
+    });
+});
+
 // Get Single Position
 router.get('/position/:id', function(req, res, next){
     db.positions.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, position){
@@ -25,7 +35,7 @@ router.get('/position/:id', function(req, res, next){
     });
 });
 
-// Get positions by IMEI
+// Get positions by IMEI, order by 'data_read_utc_time'
 router.get('/positions/:imei(\\d+)/', function(req, res, next){
     db.positions.find({ imei: parseInt(req.params.imei) }, function(err, positions){
         if(err){
