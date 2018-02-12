@@ -37,7 +37,7 @@ router.get('/position/:id', function(req, res, next){
 
 // Get positions by IMEI, order by 'data_read_utc_time'
 router.get('/positions/:imei(\\d+)/', function(req, res, next){
-    db.positions.find({ imei: parseInt(req.params.imei) }, function(err, positions){
+    db.positions.find({ imei: parseInt(req.params.imei)}).sort({data_read_utc_time:1}).limit(160, function(err, positions){
         if(err){
             res.send(err);
         }

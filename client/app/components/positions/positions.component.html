@@ -5,8 +5,7 @@
                 
                 <agm-marker *ngFor="let position of positions; let i = index;"
                  [latitude]="position.latitude"
-                 [longitude]="position.longitude"
-                 [label]="(i+1).toString()">
+                 [longitude]="position.longitude">
                     <agm-info-window>
                         <strong>{{position.data_read_utc_time | date:'short'}}</strong>
                     </agm-info-window>
